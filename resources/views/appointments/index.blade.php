@@ -8,12 +8,22 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Fecha</th>
+                    <th>Fecha y hora</th>
                     <th>Motivo</th>
                     <th>Observaciones</th>
                     <th>Mascota</th>
                 </tr>
             </thead>
+            <tbody>
+                @foreach ($appointment as $cita)
+                    <tr>
+                        <td>{{$cita -> fecha_hora}}</td>
+                        <td>{{$cita -> motivo}}</td>
+                        <td>{{$cita -> observaciones}}</td>
+                        <td>{{$cita -> pet_id}}</td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 @endsection

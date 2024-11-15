@@ -29,7 +29,12 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request -> validate([
+            'fecha_hora' => 'required',
+            'motivo' => 'required|string',
+            'observaciones' => 'required|string',
+            'pet_id' => 'nullable|integer'
+        ]);
     }
 
     /**
