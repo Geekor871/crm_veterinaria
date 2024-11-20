@@ -15,11 +15,26 @@ class AppointmentsSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('appointments')->insert([
-            'fecha_hora' => Carbon::now(),
-            'Motivo' => Str::random(10),
-            'Observaciones' => Str::random(10),
-            'pet_id' => 2
-        ]);
+        $petId = DB::table('pets')->inRandomOrder()->value('id');
+
+        if ($petId) {
+            DB::table('appointments')->insert([
+                'fecha_hora' => Carbon::now(),
+                'Motivo' => Str::random(10),
+                'Observaciones' => Str::random(10),
+                'pet_id' => $petId
+            ]);
+        } 
+        else {
+            // Si no hay registros en la tabla pets, muestra un mensaje
+            $this->command->info('No se encontraron registros en la tabla "pets".');
+        }
+    
+        // DB::table('appointments')->insert([
+        //     'fecha_hora' => Carbon::now(),
+        //     'Motivo' => Str::random(10),
+        //     'Observaciones' => Str::random(10),
+        //     'pet_id' => $petId
+        // ]);
     }
 }

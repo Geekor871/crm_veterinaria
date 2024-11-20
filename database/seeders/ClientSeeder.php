@@ -15,9 +15,9 @@ class ClientSeeder extends Seeder
     public function run(): void
     {
         DB::table('clients')->insert([
-            'nombre' => Str::random(10),
-            'telefono' => rand(1000000000, 9999999999),
-            'email' => Str::random(10).'@utld.com',
+            'nombre' => 'Becker Espinoza',//Str::random(10),
+            'telefono' => 8713983816,//rand(1000000000, 9999999999),
+            'email' => 'becker.espinoza01rivera@gmail.com'//Str::random(10).'@utld.com',
         ]);
     }
 }

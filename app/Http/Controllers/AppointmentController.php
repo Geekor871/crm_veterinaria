@@ -21,7 +21,7 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -33,7 +33,13 @@ class AppointmentController extends Controller
             'fecha_hora' => 'required',
             'motivo' => 'required|string',
             'observaciones' => 'required|string',
-            'pet_id' => 'nullable|integer'
+            'pet_id' => 'required|integer|exists:pets.id'
+        ],[
+        
+            'fecha_hora.required' => 'La fecha y hora son obligatorias.',
+            'motivo.required' => 'El motivo es obligatorio.',
+            'observaciones.required' => 'Las observaciones son obligatorias.',
+            'pet_id.exists' => 'El ID de la mascota no es válido.' 
         ]);
     }
 
