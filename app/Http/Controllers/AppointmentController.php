@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Appointment;
+use App\Models\Client;
+use App\Models\Pet;
 
 class AppointmentController extends Controller
 {
@@ -21,7 +23,9 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        
+        $clientsAppointment = Client::all();
+        $petsAppointment = Pet::all();
+        return view('appointments.create', compact('clientsAppointment','petsAppointment'));
     }
 
     /**
@@ -41,6 +45,11 @@ class AppointmentController extends Controller
             'observaciones.required' => 'Las observaciones son obligatorias.',
             'pet_id.exists' => 'El ID de la mascota no es válido.' 
         ]);
+
+        Appointment::create($request -> all());
+
+        return redirect() -> route('appointments.index')
+        -> with('success', 'Cita añadida con exito');
     }
 
     /**
