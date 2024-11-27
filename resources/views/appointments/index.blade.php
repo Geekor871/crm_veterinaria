@@ -20,7 +20,7 @@
                         <td>{{$cita -> fecha_hora}}</td>
                         <td>{{$cita -> motivo}}</td>
                         <td>{{$cita -> observaciones}}</td>
-                        <td>{{$cita -> pet_id}}</td>
+                        <td>{{$cita -> pet -> nombre}}</td>
                     </tr>
                 @endforeach
             </tbody>
