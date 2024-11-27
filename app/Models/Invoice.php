@@ -12,6 +12,6 @@ class Invoice extends Model
     protected $fillable = ['client_id', 'total', 'estado'];
 
     public function client() {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(Client::class, 'client_id');
     }
 }
