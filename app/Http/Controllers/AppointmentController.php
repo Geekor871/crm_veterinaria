@@ -42,14 +42,6 @@ class AppointmentController extends Controller
             'medico' => 'required|string',
             'veterinario' => 'required|string',
             'receta' => 'nullable|string'
-        ],[
-        
-            // 'fecha_hora.required' => 'La fecha y hora son obligatorias.',
-            // 'motivo.required' => 'El motivo es obligatorio.',
-            // 'observaciones.required' => 'Las observaciones son obligatorias.',
-            // 'pet_id.exists' => 'El ID de la mascota no es válido.',
-            // 'medico' => 'El médico es obligatorio',
-            // 'veterinario' => 'El veterinario es obligatorio',
         ]);
 
         Appointment::create($request -> all());
@@ -63,7 +55,8 @@ class AppointmentController extends Controller
      */
     public function show($id)
     {
-        $appointment = Appointment::with('pet') -> findOrFail($id);
+        $appointment = Appointment::all() -> findOrFail($id);
+        
         return view('appointments.show', compact('appointment'));
     }
 
@@ -72,17 +65,32 @@ class AppointmentController extends Controller
      */
     public function edit($id)
     {
-        $appointment = Appointment::findOrFail($id);
+        $appointment = Appointment::all() -> findOrFail($id);
         $pets = Pet::all();
-        return view('appointments.edit', compact('appointment', 'pets'));
+        $clients = Client::all();
+        return view('appointments.edit', compact('appointment', 'pets', 'clients'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request -> validate([
+            'fecha_hora' => 'nullable|date_format:Y-m-d\TH:i',
+            'motivo' => 'required|string',
+            'observaciones' => 'required|string',
+            'pet_id' => 'required',
+            'medico' => 'required|string',
+            'veterinario' => 'required|string',
+            'receta' => 'nullable|string'
+        ]);
+
+        $appointment = Appointment::findOrFail($id);
+        $appointment -> update($request -> all());
+
+        return redirect() -> route('appointments.index')
+        -> with('success', 'Mascota actualizada correctamente');
     }
 
     /**

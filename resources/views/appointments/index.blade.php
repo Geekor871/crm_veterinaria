@@ -9,19 +9,21 @@
             <thead>
                 <tr>
                     <th>Fecha y hora</th>
-                    <th>Motivo</th>
-                    <th>Observaciones</th>
                     <th>Mascota</th>
+                    <th>Dueño de la Mascota</th>
+                    <th>Motivo de la Consulta</th>
+                    <th>Observaciones</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($appointment as $cita)
                     <tr>
-                        <td>{{$cita -> fecha_hora}}</td>
-                        <td>{{$cita -> motivo}}</td>
-                        <td>{{$cita -> observaciones}}</td>
-                        <td>{{$cita -> pet -> nombre}}</td>
+                        <td>{{ $cita -> fecha_hora }}</td>
+                        <td>{{ $cita -> pet -> nombre }}</td>
+                        <td>{{ $cita -> pet -> client -> nombre }}</td>
+                        <td>{{ $cita -> motivo }}</td>
+                        <td>{{ $cita -> observaciones }}</td>
                         <td>
                             <a href="{{ route('appointments.show', $cita -> id) }}" class="btn btn-info btn-sm">Ver</a>
                             <a href="{{ route('appointments.edit', $cita -> id) }}" class="btn btn-warning btn-sm">Editar</a>

@@ -72,13 +72,13 @@
             <div class="form-group">
                 <label for="receta">Prescribir Receta</label>
                 <input type="text" name="receta" class="form-control" 
-                value="{{ old('receta') }}" required>
+                value="{{ old('receta') }}">
             </div>
 
             <div class="form-group">
-                
+                <label for="fecha_hora">Fecha y Hora de la Consulta</label>
                 <input type="datetime-local" name="fecha_hora" class="form-control" 
-                value="{{ old('fecha_hora', $appointment->fecha_hora ?? '') }}" required>
+                value="{{ old('fecha_hora', $appointment->fecha_hora ?? '') }}">
             </div>
             
             <button type="submit" class="btn btn-primary">

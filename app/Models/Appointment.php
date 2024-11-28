@@ -14,7 +14,8 @@ class Appointment extends Model
         'observaciones', 
         'pet_id',
         'medico',
-        'veterinario'
+        'veterinario',
+        'receta'
     ];
 
     public function pet() {
