@@ -61,17 +61,20 @@ class AppointmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $appointment = Appointment::with('pet') -> findOrFail($id);
+        return view('appointments.show', compact('appointment'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        
+        $appointment = Appointment::findOrFail($id);
+        $pets = Pet::all();
+        return view('appointments.edit', compact('appointment', 'pets'));
     }
 
     /**
@@ -85,8 +88,12 @@ class AppointmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $appointment = Appointment::findOrFail($id);
+        $appointment -> delete();
+
+        return redirect() -> route('appointments.index')
+        -> with('success', 'Cita eliminada correctamente');
     }
 }

@@ -12,6 +12,7 @@
                     <th>Motivo</th>
                     <th>Observaciones</th>
                     <th>Mascota</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +22,19 @@
                         <td>{{$cita -> motivo}}</td>
                         <td>{{$cita -> observaciones}}</td>
                         <td>{{$cita -> pet -> nombre}}</td>
+                        <td>
+                            <a href="{{ route('appointments.show', $cita -> id) }}" class="btn btn-info btn-sm">Ver</a>
+                            <a href="{{ route('appointments.edit', $cita -> id) }}" class="btn btn-warning btn-sm">Editar</a>
+                            <form action="{{ route('appointments.destroy', $cita -> id) }}"
+                                method="POST" style="display:inline;">
+
+                                @csrf
+                                @method('DElETE')
+                                <button type="submit" 
+                                class="btn btn-danger btn-sm" 
+                                onclick="return confirm('¿Estás seguro que quieres eliminar esta cita?')">Eliminar</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
