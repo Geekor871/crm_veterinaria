@@ -8,7 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     use HasFactory;
-    protected $fillable = ['fecha', 'motivo', 'observaciones', 'pet_id'];
+    protected $fillable = [
+        'fecha_hora', 
+        'motivo', 
+        'observaciones', 
+        'pet_id',
+        'medico',
+        'veterinario',
+        'receta'
+    ];
 
     public function pet() {
         return $this->belongsTo(Pet::class);
