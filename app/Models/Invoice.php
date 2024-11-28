@@ -15,3 +15,14 @@ class Invoice extends Model
         return $this->belongsTo(Client::class, 'client_id');
     }
 }
+
+class Product extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'nombre',
+        'cantidad',
+        'costo',
+    ];
+}
