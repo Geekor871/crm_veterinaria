@@ -24,5 +24,6 @@ Route::resource('/invoices', InvoiceController::class);
 
 Route::get('reports/appointments', [ReportController::class, 'appointmentReport'])->name('reports.appointments');
 Route::get('reports/inventory', [ReportController::class, 'inventoryReport'])->name('reports.inventory');
-Route::get('reports/invoices', [ReportController::class, 'invoiceReport'])->name('reports.invoices');
+Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
 Route::get('/pets', [PetController::class, 'index'])->name('pets.index');
+Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
