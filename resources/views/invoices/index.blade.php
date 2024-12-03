@@ -9,9 +9,11 @@
             <tr>
                 <th>ID</th>
                 <th>Cliente</th>
+                <th>Razón</th>
+                <th>Productos</th>
                 <th>Total</th>
-                <th>Estado</th>
-                <th>Fecha</th>
+                <th>Pago</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -19,9 +21,21 @@
                 <tr>
                     <td>{{ $invoice->id }}</td>
                     <td>{{ $invoice->client->nombre }}</td>
+                    <td>{{ $invoice->razon }}</td>
+                    <td>{{ $invoice->productos }}</td>
                     <td>{{ $invoice->total }}</td>
-                    <td>{{ $invoice->estado }}</td>
-                    <td>{{ $invoice->created_at }}</td>
+                    <td>{{ $invoice->pago }}</td>
+                    <td>
+                            <a href="{{ route('invoices.edit', $invoice->id) }}" 
+                            class="btn btn-warning btn-sm">Editar</a>
+                            <form action="{{ route('invoices.destroy', $invoice->id) }}" 
+                            method="POST"  style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Estas seguro que quieres eliminar esta Factura?')">Eliminar</button>
+                            </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
